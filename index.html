@@ -29,7 +29,7 @@
 							if(el.nodeName.toLower() == 'input' && el.name == 'csrfmiddlewaretoken'){
 								token = el.value;
 							}
-						}
+						});
 						if(debug == true){
 							alert ( token );
 						}
