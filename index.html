@@ -25,7 +25,8 @@
 					var token = '';
 					// Get token
 					$.get(url,null,null,'text/html').done(function(data){
-						$.each ( $.parseHTML(data),function(i,el){	// TODO: FIX
+						data=$.parseHTML(data);
+						$.each (data,function(i,el){	// TODO: FIX
 							if(el.nodeName.toLower() == 'input' && el.name == 'csrfmiddlewaretoken'){
 								token = el.value;
 							}
