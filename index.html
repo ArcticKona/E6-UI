@@ -17,7 +17,7 @@
 
 		<script>
 			const url = 'https://api.e6.kona.cf/v1';
-			var debug = false;
+			var debug = true;
 
 			$(document).ready(function(){
 				$('#search').submit(function(self){
@@ -26,8 +26,8 @@
 					// Get token
 					$.get(url,null,null,'text/html').done(function(data){
 						data=$.parseHTML(data);
-						$.each (data,function(i,el){	// TODO: FIX
-							if(el.nodeName.toLower() == 'input' && el.name == 'csrfmiddlewaretoken'){
+						$.each(data,function(i,el){	// TODO: FIX
+							if(el.name == 'csrfmiddlewaretoken'){
 								token = el.value;
 							}
 						});
