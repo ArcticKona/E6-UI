@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="Arctic Kona">
+		<meta name="generator" content="my paw">
+		<title>E621 favorites search!</title>
+		<link rel="canonical" href="">
+		<!-- jQuery Bootstrap KonaTheme -->
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"> </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"> </script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"> </script>
+<!--		<link rel="stylesheet" href="https://assets.kona.cf/kona.min.css" crossorigin="anonymous">-->
+
+		<script>
+			const url = 'http://api.e6.kona.cf/v1';
+
+			$(document).ready(function(){
+				$('#search').submit(function(self){
+					var username = $('#username').val();
+					// Query server
+					$.post(url,{
+						username: username,
+					},null,'text/html').done(function(){
+						alert('OK');
+					}).fail(function(){
+						$('#error').on('show.bs.modal',null);
+					});
+				});
+			});
+
+		</script>
+
+	</head>
+	<body>
+		<noscript>
+			<h1>
+				!!! JAVASCRIPT ERROR !!!
+			</h1>
+		</noscript>
+
+		<!-- MAIN -->
+		<main role="main" class="container">
+			<-- Background -->
+			<div style="background: url(https://live.staticflickr.com/8306/28772786791_803c36f26a_k.jpg); background-position: bottom center; background-repeat: no-repeat; background-size: cover; background-attachment: fixed; height: 100vh; width: 100vw; position: fixed;">
+			</div>
+
+			<!-- Error -->
+			<div id="error" class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">ERROR: Server Offline</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Search Box -->
+			<div id="intro" class="row vh-100 align-items-center">
+				<div class="col-12 col-md-6 mx-auto p-5	 rounded text-center text-dark">
+					<h1 class="mb-0">
+						E621 favorites search!
+					</h1>
+					<p class="mb-3	text-muted font-italic">
+						Front-end by <a href="https://arcticjieer.fam.cx/">Arctic Kona</a>. Back-end by <a href="https://reddit.com/u/shitty_markov_chain">u/shitty_markov_chain</a>.
+					</p>
+					<p class="mb-3">
+						You enter your e621 username, and it picks a list of users with similar favorites, best match first. This will even gives you a link to search for their favorites!
+					</p>
+					<form id="search" action="javascript:void(0)">
+						<div class="input-group">
+							<input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username">
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!-- Results Box -->
+			<div id="answers" class="row py-5">
+				<div class="col-12 col-md-6 mx-auto my-2 p-3	rounded text-dark text-center">
+					<h3 class="mb-0">
+						u/tigerjieer
+					</h3>
+				</div>
+			</div>
+
+		</main>
+
+		<!-- Footer 
+		<footer id="footer" class="footer p-4	bg-dark text-light text-center">
+			Copyright (c) 2019 Arctic Kona and u/shitty_markov_chain. All rights reserved.
+		</footer>-->
+	</body>
+</html>
+
