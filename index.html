@@ -17,29 +17,28 @@
 
 		<script>
 			const url = 'https://api.e6.kona.cf/v1';
-			var debug = true;
-
 			$(document).ready(function(){
 				$('#search').submit(function(self){
 					var username = $('#username').val();
 					var token = '';
+					var add = '';
 					// Get token
-					$.get(url,null,null,'text/html').done(function(data){
-						data=$.parseHTML(data);
-						$.each(data,function(i,el){	// TODO: FIX
-							if(el.name == 'csrfmiddlewaretoken'){
-								token = el.value;
-							}
-						});
-						if(debug == true){
-							alert ( token );
-						}
+					$.get(url,null,null,'html').done(function(data){
+						token = data.split("'")[6];
+						console.log( 'TOKEN '+token );
 						// Query server
 						$.post(url,{
-							csrfmiddlewaretoken: token,
-							username: username,
-						},null,'text/html').done(function(){
-							alert('OK');
+							csrfmiddlewaretoken:token,
+							username:username,
+						},null,'html').done(function(data){
+							if(data=="I don't know this username"){
+								$('#idk').show;
+							} else {
+								for(i=1;i<data.split('</p><p>').length;i++){
+									add+=('<div class="col-12 col-md-6 mx-auto my-2 p-3	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );"><h3 class="mb-0">'+data.split('</p><p>')[i]+'</h3></div>');
+								}
+								$('#answers').html(add);
+							}
 						}).fail(function(){
 							$('#error').on('show.bs.modal',null);
 						});
@@ -91,11 +90,14 @@
 					<p class="mb-3">
 						You enter your e621 username, and it picks a list of users with similar favorites, best match first. This will even gives you a link to search for their favorites!
 					</p>
-					<form id="search" action="javascript:void(0)">
+					<form id="search" class="mb-3" action="javascript:void(0)">
 						<div class="input-group">
 							<input id="username" type="text" class="form-control" placeholder="Username" aria-label="Username">
 						</div>
 					</form>
+					<p id="idk" class="text-danger font-bold">
+						Oh no! I don't know that user.
+					</p>
 				</div>
 			</div>
 
