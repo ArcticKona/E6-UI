@@ -26,7 +26,7 @@
 					var add = '';
 					$('#idk').html('	');
 					$('#answers').hide();
-					$('html, body').animate({scrollTop: 0;}, 1000);
+					$('html, body').animate({scrollTop: 0}, 1000);
 					// Get token
 					$.get(url,null,null,'html').done(function(data){
 						token = data.split("'")[5];
