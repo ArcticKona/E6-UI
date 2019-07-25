@@ -18,10 +18,12 @@
 		<script>
 			const url = 'https://api.e6.kona.cf/v1';
 			$(document).ready(function(){
+				$('#idk').hide;
 				$('#search').submit(function(self){
 					var username = $('#username').val();
 					var token = '';
 					var add = '';
+					$('#idk').hide;
 					// Get token
 					$.get(url,null,null,'html').done(function(data){
 						token = data.split("'")[6];
@@ -32,6 +34,7 @@
 							username:username,
 						},null,'html').done(function(data){
 							if(data=="I don't know this username"){
+								$('#idk').html("Oh no! I don't know that user.");
 								$('#idk').show;
 							} else {
 								for(i=1;i<data.split('</p><p>').length;i++){
@@ -40,10 +43,12 @@
 								$('#answers').html(add);
 							}
 						}).fail(function(){
-							$('#error').on('show.bs.modal',null);
+							$('#idk').html("ERROR: Server Did Not Respond");
+							$('#idk').show;
 						});
 					}).fail(function(){
-						$('#error').on('show.bs.modal',null);
+						$('#idk').html("ERROR: Server Did Not Respond");
+						$('#idk').show;
 					});
 				});
 			});
@@ -63,21 +68,6 @@
 
 		<!-- MAIN -->
 		<main role="main" class="container">
-
-			<!-- Error -->
-			<div id="error" class="modal" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">ERROR: Server Did Not Respond</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			<!-- Search Box -->
 			<div id="intro" class="row vh-100 align-items-center">
 				<div class="col-12 col-md-6 mx-auto p-5	 rounded text-center text-dark	animated fadeInUp" style="background: rgba( 255 , 255 , 255 , 0.9 );">
