@@ -19,11 +19,13 @@
 			const url = 'https://api.e6.kona.cf/v1';
 			$(document).ready(function(){
 				$('#idk').html('	');
+				$('#answers').hide();
 				$('#search').submit(function(self){
 					var username = $('#username').val();
 					var token = '';
 					var add = '';
 					$('#idk').html('	');
+					$('#answers').hide();
 					$('html, body').animate({scrollTop: 0;}, 1000);
 					// Get token
 					$.get(url,null,null,'html').done(function(data){
@@ -42,6 +44,7 @@
 									add+=('<div class="col-12 col-md-6 mx-auto my-2 p-3	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );"><h3 class="mb-0">'+data.split('</p><p>')[i]+'</h3></div>');
 								}
 								$('#answers').html(add);
+								$('#answers').show();
 								$('html, body').animate({scrollTop: $("#answers").offset().top}, 1000);
 							}
 						}).fail(function(){
@@ -93,11 +96,6 @@
 
 			<!-- Results Box -->
 			<div id="answers" class="row py-5">
-				<div class="col-12 col-md-6 mx-auto my-2 p-3	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );">
-					<h3 class="mb-0">
-						u/tigerjieer
-					</h3>
-				</div>
 			</div>
 
 		</main>
