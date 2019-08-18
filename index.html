@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
+		<meta name="description" content="Find people like you! On E621.">
 		<meta name="author" content="Arctic Kona">
-		<meta name="generator" content="my paw">
+		<meta name="generator" content="my paws">
 		<title>E621 favorites search!</title>
 		<link rel="canonical" href="">
 		<!-- jQuery Bootstrap KonaTheme -->
@@ -25,15 +25,11 @@
 					var token = '';
 					var add = '';
 					$('#idk').html('	');
-					$('#answers').hide();
-					$('html, body').animate({scrollTop: 0}, 1000);
-					// Get token
-					$.get(url,null,null,'html').done(function(data){
-						token = data.split("'")[5];
-						console.log( 'TOKEN '+token );
+					$('html, body').animate({scrollTop: 0}, 1000, function(){
+						$('#answers').hide();
+
 						// Query server
 						$.post(url,{
-							csrfmiddlewaretoken:token,
 							username:username,
 						},null,'html').done(function(data){
 							if(data=="I don't know this username"){
@@ -41,7 +37,7 @@
 							} else {
 								// Okie~ add data
 								for(i=1;i<data.split('</p><p>').length;i++){
-									add+=('<div class="col-12 col-md-6 mx-auto my-2 p-3	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );"><h3 class="mb-0">'+data.split('</p><p>')[i]+'</h3></div>');
+									add+=('<div class="col-12 col-md-6 mx-auto my-3 p-4	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );"><h4 class="mb-0">'+data.split('</p><p>')[i].split('</p>')[0]+'</h4></div><div class="w-100"></div>');
 								}
 								$('#answers').html(add);
 								$('#answers').show();
@@ -50,8 +46,6 @@
 						}).fail(function(){
 							$('#idk').html("ERROR: Server Did Not Respond");
 						});
-					}).fail(function(){
-						$('#idk').html("ERROR: Server Did Not Respond");
 					});
 				});
 			});
@@ -96,6 +90,7 @@
 
 			<!-- Results Box -->
 			<div id="answers" class="row py-5">
+
 			</div>
 
 		</main>
