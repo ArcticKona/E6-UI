@@ -35,10 +35,11 @@
 								$('#idk').html("Oh no! I don't know that user.");
 							} else {
 								// Okie~ add data
+								add='	';
 								for(i=1;i<data.split('</p><p>').length;i++){
 									add+=('<div class="col-12 col-md-6 mx-auto my-1 p-4	rounded text-dark text-center" style="background: rgba( 255 , 255 , 255 , 0.9 );"><h4 class="mb-0">'+data.split('</p><p>')[i].split('</p>')[0]+'</h4></div><div class="w-100"></div>');
 								}
-								$('#answers').html(add);
+								document.getElementById('answers').innerHTML=add;
 								$('#answers').show();
 								$('html, body').animate({scrollTop: $("#answers").offset().top}, 1000);
 							}
