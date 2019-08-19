@@ -19,7 +19,6 @@
 			const url = 'https://api.e6.kona.cf/v1';
 			$(document).ready(function(){
 				$('#answers').hide();
-				$('html, body').css({overflow: 'hidden'});
 				$('#search').submit(function(self){
 					var username = $('#username').val();
 					var token = '';
@@ -27,7 +26,6 @@
 					$('#idk').html('	');
 					$('html, body').animate({scrollTop: 0}, 1000, function(){
 						$('#answers').hide();
-						$('html, body').css({overflow: 'hidden'});
 
 						// Query server
 						$.post(url,{
@@ -43,7 +41,6 @@
 								}
 								document.getElementById('answers').innerHTML=add;
 								$('#answers').show();
-								$('html, body').css({overflow: 'auto'});
 								$('html, body').animate({scrollTop: $("#answers").offset().top}, 1000);
 							}
 						}).fail(function(){
